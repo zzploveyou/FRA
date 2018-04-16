@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dynamic Human Proteins Network created by FRA</title>
+    <meta http-equiv="keywords" content="FRA,network,proteins">
+    <meta http-equiv="description" content="FRA network using echarts.">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+  <script type="text/javascript" src="jquery-3.3.1.min.js"></script>
+  <script type="text/javascript" src="data.js"></script>
+  <script type="text/javascript" src="echarts.js"></script>
+  <script type="text/javascript" src="load.js"></script>
+  </head>
+ 
+  <body>
+	 <style>
+            html, body, #network {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+            }
+            #node_limit,#edge_limit {
+                width: 50px;
+                height: 25px;
+                margin: 20;
+            }
+            .selects{
+                width: 80px;
+                height: 40px;
+                
+            }
+            #submit{
+                width: 80px;
+                height: 40px;
+            }
+
+        </style>
+	#nodes: <input type="text" align="center" id="node_limit" value="" />
+    #edges: <input type="text" align="center" id="edge_limit" value="" />
+    year: <select class="selects" id="datas"></select>
+    label: <select class="selects" id="labels"></select>
+    <input type="button" id="submit" value="submit" onclick="init();"/>
+	<div align="center", id="network" >
+	</div>
+    
+    
+  </body>
+</html>

@@ -1,0 +1,2 @@
+ahocorasick==0.9
+biopython

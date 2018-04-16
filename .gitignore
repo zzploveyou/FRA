@@ -1,0 +1,4 @@
+*.spec
+*.pyc
+/test/*
+!/test/pubmed_result.txt
