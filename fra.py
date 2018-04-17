@@ -1,9 +1,11 @@
 #!/usr/bin/python
 # coding:utf-8
 """
-fast review algorithm of human proteins
+fast review algorithm of human proteins network
 towards PubMed papers.
 
+Author: Zhaopeng Zhang
+Email : zhangzhaopeng@mail.nankai.edu.cn
 """
 import argparse
 import os

@@ -1,5 +1,10 @@
 ﻿# Run
 
+## windows
+```
+GUI.exe
+```
+
 ## linux
 ```bash
 
@@ -18,16 +23,7 @@ fra(download from term automatically):
     python fra.py -i test2/pubmed_result.txt -o test2 --term "PIM1"
 ```
 
-## windows
-```
-python2.7
 
-packages:
-    ahocorasick(need vc support)
-    Bio
-
-python fra.py -h
-```
 
 
 Description of network weight

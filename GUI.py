@@ -4,6 +4,10 @@
 # Developed by Cihan Ruan 2016.12.15
 # Improved by 2017.9.14
 
+# Modified by Zhaopeng Zhang 2018.04.17
+# merge """GUI.py, lib_win_gui, icon.ico, limit.GIF, Welcome.gif""" into FRA program.
+# this script is needed only when you want to get GUI.exe using pyinstaller in windows platform.
+
 import Tkinter as tk
 from tkFileDialog import askopenfilename
 from tkFileDialog import asksaveasfilename
