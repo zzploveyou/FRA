@@ -26,7 +26,6 @@ function first_init() {
 function init() {
     var networkData;
     var select_data = $("#datas").val();
-    console.log($("#labels").val());
     switch (select_data) {
         case 'data_2018':
             networkData = data_2018;
