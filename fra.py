@@ -9,20 +9,16 @@ import argparse
 import os
 import sys
 
-from lib.search import find_proteins
-from lib.gephi import gephi8
 # from lib.gephi import gephi9
-from lib.data import nodes_data, edges_data
-from lib.pubmed import PMID_DP_AB
+from lib.data import edges_data, nodes_data
 from lib.echarts import echarts
-
-PATH = os.path.dirname(__file__)
-ECHARTS = os.path.join(PATH, "echarts-example")
-FRA_DATABASE = os.path.join(PATH, "proteins.txt")
-EXCLUDE_FILE = os.path.join(PATH, "exclude_names.txt")
+from lib.gephi import gephi8
+from lib.pubmed import PMID_DP_AB
+from lib.search import find_proteins
 
 
-def run(inputfile,
+def run(PATH,
+        inputfile,
         outdir,
         term="",
         max_num=0,
@@ -34,6 +30,11 @@ def run(inputfile,
         medlinefile=inputfile, term=term, max_num=max_num, email=email)
     """find proteins,write to FRA_result_file"""
     FRA_result_file = os.path.join(outdir, "FRA_result.csv")
+    ECHARTS = os.path.join(PATH, "echarts-example")
+    FRA_DATABASE = os.path.join(PATH, "proteins.txt")
+    EXCLUDE_FILE = os.path.join(PATH, "exclude_names.txt")
+    print("FRA database: {}".format(FRA_DATABASE))
+    print("exclude name list: {}".format(EXCLUDE_FILE))
     find_proteins(pmid_dp_ab, FRA_result_file, FRA_DATABASE, EXCLUDE_FILE)
     """extract information of nodes, edges"""
     node2type, node2entry, node2weight = nodes_data(FRA_result_file)
@@ -50,6 +51,7 @@ def run(inputfile,
 
 
 if __name__ == '__main__':
+    PATH = os.path.dirname(os.path.realpath(__file__))
     parser = argparse.ArgumentParser(
         description="fast review algorithms[FRA] of human proteins network \
         towards MEDLINE file")
@@ -88,7 +90,8 @@ if __name__ == '__main__':
         version='%(prog)s 1.3 created by Zhang Zhaopeng')
     args = parser.parse_args()
     if args.medfile and args.outdir:
-        run(args.medfile,
+        run(PATH,
+            args.medfile,
             args.outdir,
             term=args.term,
             max_num=args.NUM,
