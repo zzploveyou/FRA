@@ -1,5 +1,62 @@
 import csv
-import ahocorasick  # import ahocorasick
+import ahocorasick
+
+
+def actree_pre(FRA_database, excludefile):
+    """
+    create actree for muti-string-search.
+
+    Parameters
+    ----------
+    FRA_database: str
+        database txt file of FRA.
+    excludefile: str
+        exclude names from excludefile,
+        some words are not abbr of some proteins.
+
+    Returns
+    -------
+    tree_nodes: set
+        all names that will be added to actree.
+    lower_name_dic: dict
+        map of keyword to protein information.
+    """
+    exs = set()
+    with open(excludefile, 'r') as f:
+        for line in f:
+            exs.add(line.strip().lower())
+    tree_nodes = set()
+    lower_name_dic = {}
+    names, types = set(), ""
+    entry_name = ""
+    for line in open(FRA_database):
+        if line.startswith("Entry:"):
+            if entry_name != "":
+                for name in names:
+                    lower_name = name.lower()
+                    if lower_name != "" and lower_name not in exs:
+                        abb = min(names, key=len)
+                        lower_name_dic[lower_name] = (entry_name, abb, types,
+                                                      name)
+                        tree_nodes.add(lower_name)
+                names = set()
+                types = ""
+            entry = line[6:].strip()
+            if entry != "":
+                names.add(entry)
+        if line.startswith("Name :"):
+            ns = line[6:].strip().split(";")
+            for name in ns:
+                if name != "":
+                    names.add(name)
+            entry_name = ns[0]
+        if line.startswith("Gene :"):
+            gene = line[6:].strip()
+            if gene != "N/A" and gene != "":
+                names.add(gene)
+        if line.startswith("Type :"):
+            types = line[6:].strip()
+    return tree_nodes, lower_name_dic
 
 
 def actree(FRA_database, excludefile):
@@ -21,48 +78,17 @@ def actree(FRA_database, excludefile):
     lower_name_dic: dict
         map of keyword to protein information.
     """
-    exs = set()
-    with open(excludefile, 'r') as f:
-        for line in f:
-            exs.add(line.strip().lower())
+    tree_nodes, lower_name_dic = actree_pre(FRA_database, excludefile)
     tree = ahocorasick.KeywordTree()
-    lower_name_dic = {}
-    names, types = set(), ""
-    entry_name = ""
-    for line in open(FRA_database):
-        if line.startswith("Entry:"):
-            if entry_name != "":
-                for name in names:
-                    lower_name = name.lower()
-                    if lower_name != "" and lower_name not in exs:
-                        abb = min(names, key=len)
-                        lower_name_dic[lower_name] = (entry_name, abb, types,
-                                                      name)
-                        tree.add(lower_name)
-                names = set()
-                types = ""
-            entry = line[6:].strip()
-            if entry != "":
-                names.add(entry)
-        if line.startswith("Name :"):
-            ns = line[6:].strip().split(";")
-            for name in ns:
-                if name != "":
-                    names.add(name)
-            entry_name = ns[0]
-        if line.startswith("Gene :"):
-            gene = line[6:].strip()
-            if gene != "N/A" and gene != "":
-                names.add(gene)
-        if line.startswith("Type :"):
-            types = line[6:].strip()
+    for node in tree_nodes:
+        tree.add(node)
     tree.make()
     return tree, lower_name_dic
 
 
 def find_proteins(pmid_dp_ab, outputfile, FRA_database, excludefile):
     """
-    search proteins in MEDLINE format file.
+    search proteins in MEDLINE format file and write to output csvfile.
 
     Parameters
     ----------
