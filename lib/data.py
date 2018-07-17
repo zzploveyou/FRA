@@ -26,14 +26,17 @@ def nodes_data(FRA_result_file):
     for line in reader:
         PMID, PublishYear, ProteinType, Abb, EntryName, NameInAbstract = line
         if PMID != "PMID":
-            year = int(PublishYear)
-            node = Abb
-            if node not in node2entry:
-                node2entry[node] = EntryName
-            if node not in node2type:
-                node2type[node] = ProteinType
-            node2YearNum[node].append(year)
-            year2totalnum[year] += 1
+            try:
+                year = int(PublishYear)
+                node = Abb
+                if node not in node2entry:
+                    node2entry[node] = EntryName
+                if node not in node2type:
+                    node2type[node] = ProteinType
+                node2YearNum[node].append(year)
+                year2totalnum[year] += 1
+            except Exception as e:
+                print("{}: {}".format(PMID, e))
     year2accnum = defaultdict(lambda: 0)
     acc = 0
     for y, n in sorted(year2totalnum.items(), key=lambda t: t[0]):
