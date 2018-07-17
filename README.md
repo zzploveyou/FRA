@@ -2,6 +2,8 @@
 # About us
 Fast Review Algorithm -- FRA
 
+check proteins.txt and exclude_names.txt before run FRA program.
+
 http://mathbio.nankai.edu.cn/fra/
 
 # Example Results
