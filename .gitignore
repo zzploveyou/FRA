@@ -4,3 +4,5 @@
 !/test/pubmed_result.txt
 release/
 tmp/
+*diseases.txt
+!diseases.txt
