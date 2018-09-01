@@ -4,6 +4,15 @@ from collections import Counter, defaultdict
 from itertools import combinations
 
 
+def dp(PublishYear):
+    if PublishYear[:4].isdigit():
+        return int(PublishYear[:4])
+    if PublishYear[-4:].isdigit():
+        return int(PublishYear[-4:])
+    else:
+        return 0
+
+
 def nodes_data(FRA_result_file):
     """
     extract node data from FRA_result_file.
@@ -25,18 +34,15 @@ def nodes_data(FRA_result_file):
     reader = csv.reader(f)
     for line in reader:
         PMID, PublishYear, ProteinType, Abb, EntryName, NameInAbstract = line
-        if PMID != "PMID":
-            try:
-                year = int(PublishYear)
-                node = Abb
-                if node not in node2entry:
-                    node2entry[node] = EntryName
-                if node not in node2type:
-                    node2type[node] = ProteinType
-                node2YearNum[node].append(year)
-                year2totalnum[year] += 1
-            except Exception as e:
-                print("{}: {}".format(PMID, e))
+        year = dp(PublishYear)
+        if PMID != "PMID" and year != 0:
+            node = Abb
+            if node not in node2entry:
+                node2entry[node] = EntryName
+            if node not in node2type:
+                node2type[node] = ProteinType
+            node2YearNum[node].append(year)
+            year2totalnum[year] += 1
     year2accnum = defaultdict(lambda: 0)
     acc = 0
     for y, n in sorted(year2totalnum.items(), key=lambda t: t[0]):
@@ -75,16 +81,20 @@ def edges_data(FRA_result_file):
         """
         if items[0] != "PMID":
             PMID, DP, TY, AB, EN, NA = items
-            if PMID != tmp_PMID and tmp_PMID != "":
-                # print tmp_PMID, tmp_DP, nodes
-                for nodei, nodej in combinations(nodes, 2):
-                    edge2year[tuple(sorted([nodei, nodej]))].append(
-                        int(tmp_DP))
-                nodes.clear()
-            # else:
-            nodes.add(AB)
-            tmp_PMID = PMID
-            tmp_DP = int(DP)
+            DP = dp(DP)
+            if DP == 0:
+                pass
+            else:
+                if PMID != tmp_PMID and tmp_PMID != "":
+                    # print tmp_PMID, tmp_DP, nodes
+                    for nodei, nodej in combinations(nodes, 2):
+                        edge2year[tuple(sorted([nodei, nodej]))].append(
+                            int(tmp_DP))
+                    nodes.clear()
+                # else:
+                nodes.add(AB)
+                tmp_PMID = PMID
+                tmp_DP = int(DP)
     # don't forget the last one
     for nodei, nodej in combinations(nodes, 2):
         edge2year[tuple(sorted([nodei, nodej]))].append(int(tmp_DP))
