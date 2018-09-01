@@ -23,6 +23,7 @@ def run(PATH,
         inputfile,
         outdir,
         term="",
+        database="proteins.txt",
         max_num=0,
         email="test1@mail.nankai.edu.cn"):
     """input pubmed_result.txt, output results to outdir."""
@@ -33,7 +34,7 @@ def run(PATH,
     """find proteins,write to FRA_result_file"""
     FRA_result_file = os.path.join(outdir, "FRA_result.csv")
     ECHARTS = os.path.join(PATH, "echarts-example")
-    FRA_DATABASE = os.path.join(PATH, "proteins.txt")
+    FRA_DATABASE = os.path.join(PATH, database)
     EXCLUDE_FILE = os.path.join(PATH, "exclude_names.txt")
     print("FRA database: {}".format(FRA_DATABASE))
     print("exclude name list: {}".format(EXCLUDE_FILE))
@@ -77,6 +78,12 @@ if __name__ == '__main__':
         default="",
         help="specify term for PubMed querying.")
     parser.add_argument(
+        '-d',
+        '--database',
+        type=str,
+        default="proteins.txt",
+        help="specify database, proteins.txt / sth_with_diseases.txt")
+    parser.add_argument(
         '-n',
         dest="NUM",
         type=int,
@@ -96,6 +103,7 @@ if __name__ == '__main__':
             args.medfile,
             args.outdir,
             term=args.term,
+            database=args.database,
             max_num=args.NUM,
             email=args.email)
     else:
