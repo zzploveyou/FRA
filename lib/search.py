@@ -119,8 +119,11 @@ def find_proteins(pmid_dp_ab, outputfile, FRA_database, excludefile):
         for match in tree.findall_long(AB):
             if AB[match[0]:match[1]] not in proteins:
                 # fake protein name, part of a string.
-                if AB[match[0] - 1] not in p and AB[match[1]] not in p:
-                    proteins.add(AB[match[0]:match[1]])
+                try:
+                    if AB[match[0] - 1] not in p and AB[match[1]] not in p:
+                        proteins.add(AB[match[0]:match[1]])
+                except IndexError:
+                        pass
         for protein in proteins:
             entry_name, abb, types, name = lower_name_dic[protein]
             # if proteins exists in the paper.
