@@ -82,7 +82,7 @@ if __name__ == '__main__':
         '--database',
         type=str,
         default="proteins.txt",
-        help="specify database, proteins.txt / sth_with_diseases.txt")
+        help="specify database, proteins.txt / diseases.txt")
     parser.add_argument(
         '-n',
         dest="NUM",
