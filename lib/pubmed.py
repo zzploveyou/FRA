@@ -136,6 +136,6 @@ def PMID_DP_AB(medlinefile,
             records = Medline.parse(handle)
             for record in records:
                 yield (record.get("PMID", "?"), record.get("DP", ""),
-                       record.get("TI", "?") + record.get("AB", ""))
+                       record.get("TI", "?") + record.get("AB", "").replace("\n", " "))
     else:
         sys.exit("Not found: {}".format(medlinefile))
