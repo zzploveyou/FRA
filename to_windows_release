@@ -1,2 +1,2 @@
-tar zcvf release/win_release.tar.gz echarts-example test download.jpg exclude_names.txt GUI.exe limit.GIF line.gif proteins.txt README.txt Welcome.gif
+tar zcvf release/win_release.tar.gz echarts-example test download.jpg exclude_names.txt GUI.exe limit.GIF line.gif proteins.txt README.md Welcome.gif
 ls -lshtr release/win_release.tar.gz
