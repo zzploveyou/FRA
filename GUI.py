@@ -1,3 +1,4 @@
+# coding:utf-8
 ########################################################################################################################
 ####################################################GUI for FRA#########################################################
 ########################################################################################################################
@@ -13,6 +14,7 @@ from tkFileDialog import askopenfilename
 from tkFileDialog import asksaveasfilename
 import tkFileDialog as fd
 from Tkinter import IntVar
+import ttk
 import tkMessageBox
 from Tkinter import Menu
 import fra
@@ -390,7 +392,7 @@ if __name__ == '__main__':
         PathStart = folderName + "/"
 
     ######################################################################################################
-
+    database_ch = ""
     selected_file = tk.Label(
         window,
         text=filetext,
@@ -411,6 +413,23 @@ if __name__ == '__main__':
         command=openFile)
     file_btn.pack()
     file_btn.place(x=935, y=346)
+    
+    
+    def go(*args):
+        global database_ch
+        database_ch = database_choice.get()
+
+    comvalue=tk.StringVar()
+    database_choice = ttk.Combobox(
+        window,
+        textvariable=comvalue
+        )
+    database_choice.pack()
+    database_choice.place(x=650, y=400)
+    database_choice["values"]=("proteins", "diseases")
+    database_choice.current(0)  #选择第一个
+    database_choice.bind("<<ComboboxSelected>>", go)
+    
 
     def mainloop():
         #  global saveFolder
@@ -427,7 +446,7 @@ if __name__ == '__main__':
         print "inputfile: {}".format(inputfile)
         print "PATH: {}".format(PATH2)
         print "outdir: {}".format(outdir)
-        fra.run(PATH2, inputfile, outdir)
+        fra.run(PATH2, inputfile, outdir, database=database_ch+".txt")
         ########  END   ########
         texts = "end!\nClick the Check Result button to show the result."
         data_pcs["text"] = str(texts)
