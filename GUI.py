@@ -392,7 +392,7 @@ if __name__ == '__main__':
         PathStart = folderName + "/"
 
     ######################################################################################################
-    database_ch = ""
+    database_ch = "proteins"
     selected_file = tk.Label(
         window,
         text=filetext,
@@ -438,7 +438,7 @@ if __name__ == '__main__':
         #  print savePathStart
 
         ######## STEP 1 pubmed.py############
-        texts = "run FRA, please wait ... "
+        texts = "run FRA, please wait ... "+database_ch
         data_pcs["text"] = str(texts)
         window.update_idletasks()
         inputfile = fileName
