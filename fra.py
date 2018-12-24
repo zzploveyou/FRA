@@ -96,7 +96,7 @@ if __name__ == '__main__':
     parser.add_argument(
         '--version',
         action='version',
-        version='%(prog)s 1.3 created by Zhang Zhaopeng')
+        version='%(prog)s 1.4 created by Zhang Zhaopeng')
     args = parser.parse_args()
     if args.medfile and args.outdir:
         run(PATH,
