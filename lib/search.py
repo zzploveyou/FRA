@@ -45,7 +45,10 @@ def actree_pre(FRA_database, excludefile):
             if entry != "":
                 names.add(entry)
         if line.startswith("Name :"):
-            ns = line[6:].strip().split(";")
+            if "diseases" not in FRA_database:
+                ns = line[6:].strip().split(";")
+            else:
+                ns = [line[6:].strip()]
             for name in ns:
                 if name != "":
                     names.add(name)
