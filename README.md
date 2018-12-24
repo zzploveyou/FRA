@@ -107,6 +107,10 @@ gephi8.*.csv are for gephi0.8* version.
 [how to construct dynamic networks using gephi ](http://mathbio.nankai.edu.cn/fra/video.html)
 
 
+# compile into exe
 
+```
+pyinstaller.exe --console --onefile GUI.py --icon=icon.ico
+```
 
 
