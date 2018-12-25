@@ -1,2 +1,2 @@
-tar zcvf release/FRA_source.tar.gz release/ahocorasick* echarts-example test download.jpg exclude_names.txt limit.GIF line.gif proteins.txt README.md Welcome.gif lib lib_win_gui fra.py GUI.py requirements.txt diseases.txt
+tar zcvf release/FRA_source.tar.gz release/ahocorasick* echarts-example test download.jpg exclude_names.txt limit.GIF line.gif proteins.txt README.md Welcome.gif lib lib_win_gui fra.py GUI.py requirements.txt diseases.txt web-network.png
 ls -lshtr release/FRA_source.tar.gz

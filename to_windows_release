@@ -1,2 +1,2 @@
-tar zcvf release/win_release.tar.gz echarts-example test download.jpg exclude_names.txt GUI.exe limit.GIF line.gif proteins.txt README.md Welcome.gif diseases.txt
-ls -lshtr release/win_release.tar.gz
+tar zcvf release/FRA_GUI_win64.tar.gz echarts-example test download.jpg exclude_names.txt GUI.exe limit.GIF line.gif proteins.txt README.md Welcome.gif diseases.txt web-network.png
+ls -lshtr release/FRA_GUI_win64.tar.gz
