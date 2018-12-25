@@ -9,6 +9,9 @@
 # merge """GUI.py, lib_win_gui, icon.ico, limit.GIF, Welcome.gif""" into FRA program.
 # this script is needed only when you want to get GUI.exe using pyinstaller in windows platform.
 
+# Modified by Zhaopeng Zhang 2018.12.25
+# Add database choices(proteins/diseases)
+
 import Tkinter as tk
 from tkFileDialog import askopenfilename
 from tkFileDialog import asksaveasfilename
@@ -20,6 +23,7 @@ from Tkinter import Menu
 import fra
 import sys
 import os
+import time
 from lib_win_gui.startfile import start as startfile
 import webbrowser
 from lib_win_gui import PMOnlineQuery
@@ -413,23 +417,18 @@ if __name__ == '__main__':
         command=openFile)
     file_btn.pack()
     file_btn.place(x=935, y=346)
-    
-    
+
     def go(*args):
         global database_ch
         database_ch = database_choice.get()
 
-    comvalue=tk.StringVar()
-    database_choice = ttk.Combobox(
-        window,
-        textvariable=comvalue
-        )
+    comvalue = tk.StringVar()
+    database_choice = ttk.Combobox(window, textvariable=comvalue)
     database_choice.pack()
     database_choice.place(x=650, y=400)
-    database_choice["values"]=("proteins", "diseases")
+    database_choice["values"] = ("proteins", "diseases")
     database_choice.current(0)  #选择第一个
     database_choice.bind("<<ComboboxSelected>>", go)
-    
 
     def mainloop():
         #  global saveFolder
@@ -438,15 +437,16 @@ if __name__ == '__main__':
         #  print savePathStart
 
         ######## STEP 1 pubmed.py############
-        texts = "run FRA, please wait ... "+database_ch
+        texts = "run FRA, please wait ... " + database_ch
         data_pcs["text"] = str(texts)
         window.update_idletasks()
         inputfile = fileName
-        outdir = os.path.join(os.path.dirname(inputfile), "FRA")
+        outdir = os.path.join(
+            os.path.dirname(inputfile), "FRA" + str(int(time.time())))
         print "inputfile: {}".format(inputfile)
         print "PATH: {}".format(PATH2)
         print "outdir: {}".format(outdir)
-        fra.run(PATH2, inputfile, outdir, database=database_ch+".txt")
+        fra.run(PATH2, inputfile, outdir, database=database_ch + ".txt")
         ########  END   ########
         texts = "end!\nClick the Check Result button to show the result."
         data_pcs["text"] = str(texts)
