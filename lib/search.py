@@ -106,7 +106,7 @@ def find_proteins(pmid_dp_ab, outputfile, FRA_database, excludefile):
     -------
     None
     """
-    fw = open(outputfile, 'w')
+    fw = open(outputfile, 'wb')
     writer = csv.writer(fw)
     writer.writerow([
         'PMID', 'PublishYear', 'ProteinType', 'Abb', 'EntryName',

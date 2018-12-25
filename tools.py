@@ -42,7 +42,7 @@ def integrate_associated_entries(entry_name,
                 # i is a associated_entries name, entry_name is your protein(gene)
                 edges[(entry_name, i)].append(PMID)
     number_associated_entries = 0
-    with open(output_csv, 'w') as f:
+    with open(output_csv, 'wb') as f:
         writer = csv.writer(f)
         writer.writerow(['Entry', 'Associated-associated_entries', 'PMIDs'])
         for (i, j), ps in edges.items():

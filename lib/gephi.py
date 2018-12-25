@@ -35,7 +35,7 @@ def gephi8_node(nodecsvfile,
                 node2entry=None,
                 node2weight=None):
     """calculate dynamic weight of protein nodes."""
-    f_node = open(nodecsvfile, 'w')
+    f_node = open(nodecsvfile, 'wb')
     f_node_writer = csv.writer(f_node)
     f_node_writer.writerow(['Id', 'Label', 'Type', 'score', 'Time Interval'])
     if not (node2type and node2entry and node2weight):
@@ -49,7 +49,7 @@ def gephi8_node(nodecsvfile,
 
 def gephi8_edge(edgecsvfile, FRA_result_file, edge2weight=None):
     """calculate dynamic weight of protein edges."""
-    f_edge = open(edgecsvfile, 'w')
+    f_edge = open(edgecsvfile, 'wb')
     f_edge_writer = csv.writer(f_edge)
     f_edge_writer.writerow(['Source', 'Target', 'Type', 'Id', 'Weight'])
     if edge2weight is None:
@@ -91,7 +91,7 @@ def gephi9_node(nodecsvfile,
                 node2entry=None,
                 node2weight=None):
     """calculate dynamic weight of protein nodes."""
-    f_node = open(nodecsvfile, 'w')
+    f_node = open(nodecsvfile, 'wb')
     f_node_writer = csv.writer(f_node)
     f_node_writer.writerow(['Id', 'Label', 'Type', 'Timestamp', 'score'])
     if not (node2type and node2entry and node2weight):
@@ -104,7 +104,7 @@ def gephi9_node(nodecsvfile,
 
 def gephi9_edge(edgecsvfile, FRA_result_file, edge2weight=None):
     """calculate dynamic weight of protein edges."""
-    f_edge = open(edgecsvfile, 'w')
+    f_edge = open(edgecsvfile, 'wb')
     f_edge_writer = csv.writer(f_edge)
     f_edge_writer.writerow(
         ['Source', 'Target', 'Type', 'Id', 'Timestamp', 'Weight'])
