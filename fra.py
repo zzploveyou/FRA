@@ -17,6 +17,7 @@ from lib.echarts import echarts
 from lib.gephi import gephi8
 from lib.pubmed import PMID_DP_AB
 from lib.search import find_proteins
+from tools import integrate_associated_entries, reduce_from_resultcsv
 
 
 def run(PATH,
@@ -50,6 +51,19 @@ def run(PATH,
     """echarts"""
     echarts(outdir, FRA_result_file, node2type, node2entry, node2weight,
             edge2weight, ECHARTS)
+    """fra-tools"""
+    manual_dir = os.path.join(outdir, "manual")
+    if not os.path.exists(manual_dir):
+        os.makedirs(manual_dir)
+    integrate_associated_entries(
+        entry_name="test",
+        FRA_result_csvfile=FRA_result_file,
+        output_csv=os.path.join(manual_dir, "result.csv"))
+    reduce_from_resultcsv(
+        resultcsv=os.path.join(manual_dir, "result.csv"),
+        medlinefile=inputfile,
+        result_readable=os.path.join(manual_dir, "FRA_readable.txt"),
+        result_medline=os.path.join(manual_dir, "FRA_medline.txt"))
     print("[+] done.")
 
 
