@@ -1,2 +1,8 @@
-tar zcvf release/FRA_source.tar.gz release/ahocorasick* echarts-example test/pubmed_result.txt download.jpg exclude_names.txt limit.GIF line.gif proteins.txt README.md Welcome.gif lib lib_win_gui fra.py GUI.py requirements.txt diseases.txt web-network.png
-ls -lshtr release/FRA_source.tar.gz
+#!/bin/bash
+
+if [ "$1" == "" ];then
+    echo "Usage[Need version number]: ./to_source_code 1.0"
+    exit 0
+fi
+
+tar --exclude="*.pyc" -zcvf release/FRA_$1_source.tar.gz release/ahocorasick* echarts-example test/pubmed_result.txt download.jpg exclude_names.txt limit.GIF line.gif proteins.txt README.md Welcome.gif lib lib_win_gui fra.py GUI.py requirements.txt diseases.txt web-network.png

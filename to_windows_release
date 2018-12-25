@@ -1,2 +1,8 @@
-tar zcvf release/FRA_GUI_win64.tar.gz echarts-example test/pubmed_result.txt download.jpg exclude_names.txt GUI.exe limit.GIF line.gif proteins.txt README.md Welcome.gif diseases.txt web-network.png
-ls -lshtr release/FRA_GUI_win64.tar.gz
+#!/bin/bash
+
+if [ "$1" == "" ];then
+    echo "Usage[Need version number]: ./to_windows_release 1.0"
+    exit 0
+fi
+
+tar zcvf release/FRA_$1_GUI_win64.tar.gz echarts-example test/pubmed_result.txt download.jpg exclude_names.txt GUI.exe limit.GIF line.gif proteins.txt README.md Welcome.gif diseases.txt web-network.png
