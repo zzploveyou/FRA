@@ -44,7 +44,7 @@ def integrate_associated_entries(entry_name,
     number_associated_entries = 0
     with open(output_csv, 'wb') as f:
         writer = csv.writer(f)
-        writer.writerow(['Entry', 'Associated-associated_entries', 'PMIDs'])
+        writer.writerow(['Entry', 'Associated-entries', 'PMIDs'])
         for (i, j), ps in edges.items():
             number_associated_entries += 1
             writer.writerow([i, j, ", ".join(ps)])
