@@ -70,8 +70,14 @@ def run(PATH,
 if __name__ == '__main__':
     PATH = os.path.dirname(os.path.realpath(__file__))
     parser = argparse.ArgumentParser(
-        description="fast review algorithms[FRA] of human proteins network \
-        towards MEDLINE file")
+        description="""
+        fast review algorithms[FRA] of human proteins network towards MEDLINE file.
+        
+        For Example:
+            python fra.py -o test/ -m test/pubmed_result.txt
+            python fra.py -d diseases.txt -o test/ -m test/pubmed_result.txt
+            python fra.py -t 'nankai[Title/Abstract]' -o outdir/ -m outdir/pubmed_result.txt""",
+        formatter_class=argparse.RawTextHelpFormatter)
     required = parser.add_argument_group('required arguments')
     required.add_argument(
         "-m",
