@@ -121,7 +121,7 @@ gephi8.*.csv are for gephi0.8* version.
 ## compile into exe
 
 ```
-pyinstaller.exe --console --onefile GUI.py --icon=icon.ico
+pyinstaller.exe -w --onefile GUI.py --icon=icon.ico
 ```
 
 
