@@ -9,8 +9,8 @@ $(function () {
 
 function first_init() {
     var html = "";
-    for (var i = 2018; i >= 1995; i--) {
-        if (i == 2017) {
+    for (var i = 2019; i >= 1995; i--) {
+        if (i == 2018) {
             html += "<option value='data_" + i + "' name='data' selected='selected'>" + i + "</option>";
         } else {
             html += "<option value='data_" + i + "' name='data'>" + i + "</option>";
@@ -27,6 +27,9 @@ function init() {
     var networkData;
     var select_data = $("#datas").val();
     switch (select_data) {
+        case 'data_2019':
+            networkData = data_2019;
+            break;
         case 'data_2018':
             networkData = data_2018;
             break;
