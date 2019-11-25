@@ -442,7 +442,7 @@ if __name__ == '__main__':
         window.update_idletasks()
         inputfile = fileName
         outdir = os.path.join(
-            os.path.dirname(inputfile), "FRA" + str(int(time.time())))
+            os.path.dirname(inputfile), database_ch + str(int(time.time())))
         print "inputfile: {}".format(inputfile)
         print "PATH: {}".format(PATH2)
         print "outdir: {}".format(outdir)
