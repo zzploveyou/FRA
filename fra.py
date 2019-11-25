@@ -26,7 +26,8 @@ def run(PATH,
         term="",
         database="proteins.txt",
         max_num=0,
-        email="test1@mail.nankai.edu.cn"):
+        email="test1@mail.nankai.edu.cn",
+        stand_tag=False):
     """input pubmed_result.txt, output results to outdir."""
     if not os.path.exists(outdir):
         os.makedirs(outdir)
@@ -50,7 +51,7 @@ def run(PATH,
     #        edge2weight)
     """echarts"""
     echarts(outdir, FRA_result_file, node2type, node2entry, node2weight,
-            edge2weight, ECHARTS)
+            edge2weight, ECHARTS, stand_tag)
     """fra-tools"""
     manual_dir = os.path.join(outdir, "manual")
     if not os.path.exists(manual_dir):

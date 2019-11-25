@@ -7,7 +7,7 @@ from json import dumps
 
 
 def echarts(outdir, FRA_result_file, node2type, node2entry, node2weight,
-            edge2weight, ECHARTS):
+            edge2weight, ECHARTS, stand_tag=False):
     if not (node2type and node2entry and node2weight):
         node2type, node2entry, node2weight = nodes_data(FRA_result_file)
     if edge2weight is None:
@@ -89,7 +89,12 @@ def echarts(outdir, FRA_result_file, node2type, node2entry, node2weight,
             idx += 1
         # change node to node+entryname
         for dic in nodes:
-            dic['name'] += "\n{}".format(node2entry[dic['name']])
+            if stand_tag is False:
+                # just entry name
+                dic['name'] = node2entry[dic['name']]
+            else:
+                # standard name + entry name
+                dic['name'] += "\n{}".format(node2entry[dic['name']])
         # nodes list
         data_year[year]['nodes'] = nodes
 
